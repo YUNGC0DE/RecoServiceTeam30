@@ -1,4 +1,3 @@
-import os
 from http import HTTPStatus
 
 from starlette.testclient import TestClient
@@ -6,7 +5,6 @@ from starlette.testclient import TestClient
 from service.settings import ServiceConfig
 
 GET_RECO_PATH = "/reco/{model_name}/{user_id}"
-MODEL_NAME = os.getenv("MODEL_NAME", "model_0")
 
 
 def test_health(
@@ -21,7 +19,7 @@ def test_empty_token(
     client: TestClient,
 ) -> None:
     user_id = 10**10
-    path = GET_RECO_PATH.format(model_name=MODEL_NAME, user_id=user_id)
+    path = GET_RECO_PATH.format(model_name="zero", user_id=user_id)
     client.headers.pop("Authorization")
     with client:
         response = client.get(path)
@@ -33,7 +31,7 @@ def test_wrong_token(
     client: TestClient,
 ) -> None:
     user_id = 10**10
-    path = GET_RECO_PATH.format(model_name=MODEL_NAME, user_id=user_id)
+    path = GET_RECO_PATH.format(model_name="zero", user_id=user_id)
     client.headers.update({"Authorization": "bearer KEK"})
     with client:
         response = client.get(path)
@@ -56,7 +54,7 @@ def test_get_reco_success(
     service_config: ServiceConfig,
 ) -> None:
     user_id = 123
-    path = GET_RECO_PATH.format(model_name=MODEL_NAME, user_id=user_id)
+    path = GET_RECO_PATH.format(model_name="zero", user_id=user_id)
     with client:
         response = client.get(path)
     assert response.status_code == HTTPStatus.OK
@@ -70,7 +68,7 @@ def test_get_reco_for_unknown_user(
     client: TestClient,
 ) -> None:
     user_id = 10**10
-    path = GET_RECO_PATH.format(model_name=MODEL_NAME, user_id=user_id)
+    path = GET_RECO_PATH.format(model_name="zero", user_id=user_id)
     with client:
         response = client.get(path)
     assert response.status_code == HTTPStatus.NOT_FOUND
