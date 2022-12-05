@@ -66,3 +66,8 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+**/*.joblib
+**/*.csv
+/Notebooks/hw3/kion_train/
+dumps/userknnbm25-pop-precalculated.json

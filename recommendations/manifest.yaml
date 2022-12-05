@@ -1,0 +1,18 @@
+#- !OfflineJSONRecommender
+#  name: userknnbm25-pop
+#  dump: userknnbm25-pop-precalculated.json
+#
+- !ZeroModel
+  name: zero
+#
+#- !Popular
+#  name: popular
+#  model_dump: popmodel.joblib
+#  dataset_dump: popmodel-dataset.joblib
+
+#- !UserKNN
+#  name: userknn-tfidf-online
+#  model: userknn-tfidf.joblib
+#  users_mapping_dump: users-mappings.joblib
+#  items_mapping_dump: items-mappings.joblib
+#  train: interactions.csv

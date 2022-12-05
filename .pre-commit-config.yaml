@@ -4,13 +4,11 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
-      - id: check-added-large-files
       - id: check-case-conflict
       - id: check-docstring-first
       - id: check-executables-have-shebangs
       - id: check-toml
       - id: check-merge-conflict
-      - id: check-yaml
       - id: debug-statements
       - id: end-of-file-fixer
       - id: mixed-line-ending
@@ -28,7 +26,7 @@ repos:
     rev: v0.950
     hooks:
       - id: mypy
-        exclude: tests/.*\.py
+        exclude: tests/.*\.py|Notebooks
         additional_dependencies:
           - types-requests
           - types-PyYAML
@@ -40,6 +38,7 @@ repos:
     rev: 5.0.4
     hooks:
       - id: flake8
+        exclude: Notebooks
         args:
           - '-j8'
         additional_dependencies:

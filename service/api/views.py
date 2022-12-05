@@ -15,8 +15,10 @@ from fastapi.security import (
 from pydantic import BaseModel
 
 from creds import token
-from recommendations.estimator import Estimator
-from recommendations.model_utils import load_model
+from recommendations.model_utils import (
+    load_model,
+    safe_recommend,
+)
 from service.api.exceptions import (
     NotAuthUser,
     UserNotFoundError,
@@ -69,12 +71,17 @@ async def get_reco(
         raise UserNotFoundError(error_message=f"User {user_id} not found")
 
     try:
-        model: Estimator = load_model(model_name)
+        load_model(model_name)
     except ValueError:
         raise WrongModelName(error_message=f"Model {model_name} doesn't exist")
 
     k_recs = request.app.state.k_recs
-    recommendations: np.ndarray = model.recommend([user_id], k_recs)
+    recommendations: np.ndarray = safe_recommend(
+        model_name,
+        [user_id],
+        k_recs,
+        request.app.state.resolution_strategy,
+    )
     return RecoResponse(user_id=user_id, items=recommendations.tolist())
 
 

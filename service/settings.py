@@ -21,6 +21,8 @@ class ServiceConfig(Config):
     service_name: str = "reco_service"
     k_recs: int = 10
 
+    resolution_strategy: str = "topfixed"
+
     log_config: LogConfig
 
 
