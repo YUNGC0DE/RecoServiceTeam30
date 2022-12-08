@@ -9,3 +9,4 @@ orjson==3.8.1
 
 pandas==1.5.2
 rich==12.6.0
+rectools==0.2.0
