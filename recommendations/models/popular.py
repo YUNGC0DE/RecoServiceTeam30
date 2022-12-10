@@ -13,7 +13,6 @@ __all__ = ["Popular"]
 
 
 class Popular(Estimator):  # type: ignore
-    name = "popular"
 
     def __init__(self, model_dump, dataset_dump, *args, **kwargs):
         """

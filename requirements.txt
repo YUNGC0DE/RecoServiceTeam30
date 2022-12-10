@@ -15,4 +15,3 @@ scipy==1.8.1
 pyyaml
 
 click
-
