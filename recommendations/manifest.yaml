@@ -1,7 +1,7 @@
 #- !OfflineJSONRecommender
-#  name: userknnbm25-pop
-#  dump: userknnbm25-pop-precalculated.json
-#
+#  name: lightfm
+#  dump: lightfm-precalculated.json
+
 - !ZeroModel
   name: zero
 #
@@ -16,3 +16,7 @@
 #  users_mapping_dump: users-mappings.joblib
 #  items_mapping_dump: items-mappings.joblib
 #  train: interactions.csv
+
+#- !LFM
+#  name: LightFM
+#  zipfile_name: LightFM.zip

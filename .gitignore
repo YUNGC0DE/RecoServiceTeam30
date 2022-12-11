@@ -71,3 +71,4 @@ venv.bak/
 **/*.csv
 /Notebooks/hw3/kion_train/
 dumps/userknnbm25-pop-precalculated.json
+dumps/lightfm-precalculated.json

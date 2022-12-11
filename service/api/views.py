@@ -21,13 +21,15 @@ from recommendations.model_utils import (
 )
 from service.api.exceptions import (
     NotAuthUser,
-    UserNotFoundError, WrongModelName,
+    UserNotFoundError,
+    WrongModelName,
 )
 
 router = APIRouter()
 security = HTTPBearer()
 
 log = logging.getLogger(__name__)
+
 
 class RecoResponse(BaseModel):
     user_id: int
