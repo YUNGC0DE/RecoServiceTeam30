@@ -1,11 +1,18 @@
+import logging
+
 import uvicorn as uvicorn
 from fastapi import FastAPI
 
+from recommendations.estimator import discover_models
+from recommendations.model_utils import load_model
+from recommendations.resolvers import get_resolvers
 from service.api.exception_handlers import add_exception_handlers
 from service.api.middlewares import add_middlewares
 from service.api.views import add_views
 from service.log import setup_logging
 from service.settings import ServiceConfig
+
+log = logging.getLogger(__name__)
 
 __all__ = ["create_app"]
 
@@ -15,9 +22,21 @@ def create_app(config: ServiceConfig) -> FastAPI:
     app = FastAPI(debug=False)
     app.state.k_recs = config.k_recs
 
+    if config.resolution_strategy not in get_resolvers():
+        raise ValueError(
+            f"Wrong resolution strategy: {config.resolution_strategy}"
+        )
+
+    app.state.resolution_strategy = config.resolution_strategy
+    log.info(f"Using resolution strategy: {config.resolution_strategy}")
+
     add_views(app)
     add_middlewares(app)
     add_exception_handlers(app)
+
+    models = discover_models()
+    for model in models.keys():
+        load_model(model)
 
     return app
 
