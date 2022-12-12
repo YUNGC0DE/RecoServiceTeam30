@@ -17,6 +17,8 @@
 #  items_mapping_dump: items-mappings.joblib
 #  train: interactions.csv
 
-#- !LFM
-#  name: LightFM
-#  zipfile_name: LightFM.zip
+#- !LFMOnline
+#  name: lightfm-online
+#  model: lightfm-warp-30-u0-i0-6.joblib
+#  users_mapping_dump: users-mappings.joblib
+#  items_mapping_dump: items-mappings.joblib
