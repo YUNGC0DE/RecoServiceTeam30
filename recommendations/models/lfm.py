@@ -17,7 +17,7 @@ from recommendations.estimator import (
 from recommendations.model_utils import load_model
 
 
-class LFMOnline(Estimator):
+class LFMOnline(Estimator):  # type: ignore
     """
     A class for making online recommendations using a trained LightFM model.
 
